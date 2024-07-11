@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id                     String               @id @default(uuid())
+  agendacion             DateTime             @default(now())
+  email                  String
+  utm_source             String
+  utm_campaign           String
+  utm_medium             String
+  utm_term               String
+  utm_content            String
+  state                  StateLead            @default(unmanaged)
+  closerId               String
+  closer                 User                 @relation(fields: [closerId], references: [id], onDelete: Cascade )
+  createdAt              DateTime             @default(now())
+  updatedAt              DateTime             @updatedAt
+}
+
+model User {
+  id                     String               @id @default(uuid())
+  name                   String
+  email                  String               @unique()
+  role                   Role                 @default(CLOSER)
+  password               String
+  leadsAssign            Lead[]
+  createdAt              DateTime             @default(now())
+  updatedAt              DateTime             @updatedAt
+}
+
+enum Role {
+  ADMIN
+  CLOSER
+}
+
+enum StateLead {
+  unmanaged
+  contacted
+  await_answer 
+  in_call
+  win
+  close
+}
