@@ -10,6 +10,6 @@ router
     .get('/one', AdminPermission, getOneUser)
     .post('/create', createUser)
     .put('/update', AdminPermission, updateUser)
-    .delete('/delete', AdminPermission, deleteUser)
+    .delete('/delete/:id', AdminPermission, deleteUser)
 
 export { router }
