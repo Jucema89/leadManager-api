@@ -11,6 +11,7 @@ datasource db {
 
 model Lead {
   id                     String               @id @default(uuid())
+  id_row                 Int               
   agendacion             DateTime             @default(now())
   email                  String
   utm_source             String
@@ -18,9 +19,8 @@ model Lead {
   utm_medium             String
   utm_term               String
   utm_content            String
+  closer_name            String               @default("")
   state                  StateLead            @default(unmanaged)
-  closerId               String
-  closer                 User                 @relation(fields: [closerId], references: [id], onDelete: Cascade )
   createdAt              DateTime             @default(now())
   updatedAt              DateTime             @updatedAt
 }
@@ -31,7 +31,6 @@ model User {
   email                  String               @unique()
   role                   Role                 @default(CLOSER)
   password               String
-  leadsAssign            Lead[]
   createdAt              DateTime             @default(now())
   updatedAt              DateTime             @updatedAt
 }

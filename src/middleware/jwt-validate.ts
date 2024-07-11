@@ -75,7 +75,7 @@ export interface DataExpress {
 
         const decode: JWTdata = await verifyToken( tokenArray[1] ) as JWTdata
 
-        if(!decode.data.uid || decode.data.uid === ''){
+        if(!decode?.data?.uid || decode.data.uid === ''){
           result({
             success: false,
             message: 'Error: Token invalid, retry again or Login',

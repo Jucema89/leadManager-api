@@ -8,7 +8,7 @@ const router = Router()
 router
     .get('/alls', AdminPermission, getAllUsers)
     .get('/one', AdminPermission, getOneUser)
-    .post('/create', AdminPermission, createUser)
+    .post('/create', createUser)
     .put('/update', AdminPermission, updateUser)
     .delete('/delete', AdminPermission, deleteUser)
 

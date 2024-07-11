@@ -48,11 +48,10 @@ jspm_packages/
 
 # exclude uploads
 uploads/*
-trainers/*
+src/conf/*
 
 #uploads files in folder
-!uploads/.gitkeep 
-!trainers/.gitkeep 
+!src/conf/.gitkeep
 #folder data for IA
 data/*
 !data/.gitkeep
